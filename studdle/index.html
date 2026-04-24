@@ -4,17 +4,15 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Em Desenvolvimento</title>
-  <!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Em Desenvolvimento</title>
-  <link rel="shortcut icon" type="image/png" href="studdle.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="studdle.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="studdle.png">
-  <link rel="icon" type="image/png" sizes="48x48" href="studdle.png">
-  <link rel="apple-touch-icon" type="image/png" href="studdle.png">
+
+  <!-- ===== FAVICON ===== -->
+  <!-- O cache-bust (?v=2) força o navegador a recarregar a imagem -->
+  <link rel="shortcut icon" type="image/png" href="studdle.png?v=2">
+  <link rel="icon" type="image/png" sizes="16x16" href="studdle.png?v=2">
+  <link rel="icon" type="image/png" sizes="32x32" href="studdle.png?v=2">
+  <link rel="icon" type="image/png" sizes="48x48" href="studdle.png?v=2">
+  <link rel="apple-touch-icon" type="image/png" href="studdle.png?v=2">
+
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@300;400;600&display=swap" rel="stylesheet"/>
   <style>
     /* ===== VARIÁVEIS DE COR ===== */
@@ -106,7 +104,6 @@
       height: 130px;
     }
 
-    /* Anel externo – gira continuamente */
     .ring-outer {
       position: absolute;
       inset: 0;
@@ -118,7 +115,6 @@
       filter: drop-shadow(0 0 8px var(--purple-bright));
     }
 
-    /* Anel interno – gira no sentido contrário */
     .ring-inner {
       position: absolute;
       inset: 15px;
@@ -130,7 +126,6 @@
       filter: drop-shadow(0 0 5px var(--purple-glow));
     }
 
-    /* Ponto central pulsante */
     .ring-dot {
       position: absolute;
       top: 50%; left: 50%;
@@ -169,7 +164,6 @@
       to   { opacity: 1; letter-spacing: 0.25em; }
     }
 
-    /* Linha decorativa sob o título */
     .title-line {
       width: 80px;
       height: 1px;
@@ -207,7 +201,6 @@
       overflow: hidden;
     }
 
-    /* Brilho animado deslizando na borda do card */
     .message-card::before {
       content: '';
       position: absolute;
@@ -243,19 +236,13 @@
       font-weight: 400;
       text-align: left;
     }
-
-
   </style>
 </head>
 <body>
 
-  <!-- Partículas de fundo -->
   <canvas id="particles"></canvas>
-
-  <!-- Brilho central -->
   <div class="radial-glow"></div>
 
-  <!-- Ondas decorativas -->
   <svg class="waves" viewBox="0 0 1440 200" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
     <defs>
       <linearGradient id="wg" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -265,19 +252,16 @@
         <stop offset="100%" stop-color="#6b21a8" stop-opacity="0"/>
       </linearGradient>
     </defs>
-    <!-- Onda 1 -->
     <path d="M0,120 C240,60 480,180 720,120 C960,60 1200,180 1440,120 L1440,200 L0,200 Z"
           fill="url(#wg)" opacity="0.5">
       <animateTransform attributeName="transform" type="translate"
         values="0,0; -80,0; 0,0" dur="8s" repeatCount="indefinite"/>
     </path>
-    <!-- Onda 2 -->
     <path d="M0,150 C300,90 600,170 900,140 C1150,115 1300,160 1440,130 L1440,200 L0,200 Z"
           fill="url(#wg)" opacity="0.3">
       <animateTransform attributeName="transform" type="translate"
         values="0,0; 60,0; 0,0" dur="6s" repeatCount="indefinite"/>
     </path>
-    <!-- Onda 3 (fina de brilho) -->
     <path d="M0,180 C360,155 720,195 1080,170 C1260,158 1380,175 1440,165 L1440,200 L0,200 Z"
           fill="url(#wg)" opacity="0.6">
       <animateTransform attributeName="transform" type="translate"
@@ -285,43 +269,28 @@
     </path>
   </svg>
 
-  <!-- Conteúdo central -->
   <div class="container">
-
-    <!-- Anel giratório -->
     <div class="ring-wrapper">
       <div class="ring-outer"></div>
       <div class="ring-inner"></div>
       <div class="ring-dot"></div>
     </div>
 
-    <!-- Título -->
     <h1 class="title">EM DESENVOLVIMENTO</h1>
-
-    <!-- Linha decorativa -->
     <div class="title-line"></div>
-
-    <!-- Subtítulo -->
     <p class="subtitle">V O L T E &nbsp; E M &nbsp; B R E V E</p>
 
-    <!-- Card de mensagem -->
     <div class="message-card">
       <span class="card-icon">🚀</span>
       <div class="card-divider"></div>
       <p class="card-text">Estamos trabalhando para trazer algo incrível para você.</p>
     </div>
-
   </div>
 
   <script>
-    /* ============================================================
-       PARTÍCULAS FLUTUANTES
-       Cria partículas roxas que sobem lentamente pela tela.
-    ============================================================ */
     const canvas = document.getElementById('particles');
     const ctx = canvas.getContext('2d');
 
-    // Redimensiona o canvas ao tamanho da janela
     function resize() {
       canvas.width  = window.innerWidth;
       canvas.height = window.innerHeight;
@@ -329,17 +298,15 @@
     resize();
     window.addEventListener('resize', resize);
 
-    // Cria um array de partículas com propriedades aleatórias
     const particles = Array.from({ length: 80 }, () => ({
       x: Math.random() * window.innerWidth,
       y: Math.random() * window.innerHeight,
-      r: Math.random() * 1.8 + 0.3,        // raio
-      speed: Math.random() * 0.4 + 0.1,    // velocidade de subida
-      drift: (Math.random() - 0.5) * 0.3,  // deriva horizontal
+      r: Math.random() * 1.8 + 0.3,
+      speed: Math.random() * 0.4 + 0.1,
+      drift: (Math.random() - 0.5) * 0.3,
       opacity: Math.random() * 0.6 + 0.1,
     }));
 
-    // Loop de animação: limpa e redesenha cada frame
     function drawParticles() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -349,375 +316,18 @@
         ctx.fillStyle = `rgba(168, 85, 247, ${p.opacity})`;
         ctx.fill();
 
-        // Move a partícula para cima e lateralmente
         p.y -= p.speed;
         p.x += p.drift;
 
-        // Quando sair pelo topo, reposiciona na base com nova posição X
         if (p.y < -5) {
           p.y = canvas.height + 5;
           p.x = Math.random() * canvas.width;
         }
       }
 
-      requestAnimationFrame(drawParticles); // chama o próximo frame
+      requestAnimationFrame(drawParticles);
     }
     drawParticles();
-
-
-  </script>
-</body>
-</html>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@300;400;600&display=swap" rel="stylesheet"/>
-  <style>
-    /* ===== VARIÁVEIS DE COR ===== */
-    :root {
-      --bg: #05030a;
-      --purple-deep: #1a0533;
-      --purple-mid: #6b21a8;
-      --purple-bright: #a855f7;
-      --purple-glow: #d946ef;
-      --white: #f0e6ff;
-      --subtle: rgba(168, 85, 247, 0.15);
-    }
-
-    /* ===== RESET E BASE ===== */
-    *, *::before, *::after {
-      margin: 0; padding: 0; box-sizing: border-box;
-    }
-
-    body {
-      background: var(--bg);
-      color: var(--white);
-      font-family: 'Rajdhani', sans-serif;
-      min-height: 100vh;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-    }
-
-    /* ===== CANVAS DE PARTÍCULAS (FUNDO) ===== */
-    #particles {
-      position: fixed;
-      inset: 0;
-      z-index: 0;
-      pointer-events: none;
-    }
-
-    /* ===== ONDAS SVG NO RODAPÉ ===== */
-    .waves {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      z-index: 1;
-      opacity: 0.35;
-    }
-
-    /* ===== BRILHO RADIAL NO CENTRO ===== */
-    .radial-glow {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 700px;
-      height: 700px;
-      background: radial-gradient(circle, rgba(107,33,168,0.25) 0%, transparent 70%);
-      border-radius: 50%;
-      z-index: 1;
-      animation: pulseGlow 4s ease-in-out infinite;
-    }
-
-    @keyframes pulseGlow {
-      0%, 100% { opacity: 0.6; transform: translate(-50%, -50%) scale(1); }
-      50%       { opacity: 1;   transform: translate(-50%, -50%) scale(1.12); }
-    }
-
-    /* ===== CONTAINER PRINCIPAL ===== */
-    .container {
-      position: relative;
-      z-index: 10;
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 2rem;
-      animation: fadeUp 1.2s cubic-bezier(.16,1,.3,1) both;
-    }
-
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(40px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    /* ===== ANEL GIRATÓRIO ===== */
-    .ring-wrapper {
-      position: relative;
-      width: 130px;
-      height: 130px;
-    }
-
-    /* Anel externo – gira continuamente */
-    .ring-outer {
-      position: absolute;
-      inset: 0;
-      border-radius: 50%;
-      border: 1.5px solid transparent;
-      border-top-color: var(--purple-bright);
-      border-right-color: var(--purple-glow);
-      animation: spinRing 2.4s linear infinite;
-      filter: drop-shadow(0 0 8px var(--purple-bright));
-    }
-
-    /* Anel interno – gira no sentido contrário */
-    .ring-inner {
-      position: absolute;
-      inset: 15px;
-      border-radius: 50%;
-      border: 1px solid transparent;
-      border-bottom-color: var(--purple-glow);
-      border-left-color: var(--purple-mid);
-      animation: spinRing 1.6s linear infinite reverse;
-      filter: drop-shadow(0 0 5px var(--purple-glow));
-    }
-
-    /* Ponto central pulsante */
-    .ring-dot {
-      position: absolute;
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      width: 12px; height: 12px;
-      border-radius: 50%;
-      background: var(--purple-bright);
-      box-shadow: 0 0 18px 6px var(--purple-glow);
-      animation: dotPulse 2s ease-in-out infinite;
-    }
-
-    @keyframes spinRing {
-      to { transform: rotate(360deg); }
-    }
-    @keyframes dotPulse {
-      0%, 100% { box-shadow: 0 0 18px 6px var(--purple-glow); }
-      50%       { box-shadow: 0 0 30px 12px var(--purple-bright); }
-    }
-
-    /* ===== TÍTULO PRINCIPAL ===== */
-    .title {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(3rem, 9vw, 7rem);
-      letter-spacing: 0.25em;
-      line-height: 1;
-      background: linear-gradient(135deg, #fff 30%, var(--purple-bright) 70%, var(--purple-glow) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      animation: titleReveal 1.4s cubic-bezier(.16,1,.3,1) 0.3s both;
-      filter: drop-shadow(0 0 30px rgba(168,85,247,0.5));
-    }
-
-    @keyframes titleReveal {
-      from { opacity: 0; letter-spacing: 0.6em; }
-      to   { opacity: 1; letter-spacing: 0.25em; }
-    }
-
-    /* Linha decorativa sob o título */
-    .title-line {
-      width: 80px;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--purple-bright), transparent);
-      animation: lineExpand 1.5s ease 0.8s both;
-    }
-
-    @keyframes lineExpand {
-      from { width: 0; opacity: 0; }
-      to   { width: 80px; opacity: 1; }
-    }
-
-    /* ===== SUBTÍTULO ===== */
-    .subtitle {
-      font-size: clamp(0.75rem, 2vw, 0.95rem);
-      letter-spacing: 0.45em;
-      color: rgba(240,230,255,0.55);
-      font-weight: 300;
-      animation: fadeUp 1s ease 0.6s both;
-    }
-
-    /* ===== CARD DE MENSAGEM ===== */
-    .message-card {
-      display: flex;
-      align-items: center;
-      gap: 1.2rem;
-      padding: 1rem 1.8rem;
-      border: 1px solid rgba(168,85,247,0.3);
-      border-radius: 12px;
-      background: rgba(107,33,168,0.08);
-      backdrop-filter: blur(8px);
-      max-width: 420px;
-      animation: fadeUp 1s ease 0.9s both;
-      position: relative;
-      overflow: hidden;
-    }
-
-    /* Brilho animado deslizando na borda do card */
-    .message-card::before {
-      content: '';
-      position: absolute;
-      top: -50%; left: -75%;
-      width: 50%; height: 200%;
-      background: linear-gradient(90deg, transparent, rgba(168,85,247,0.2), transparent);
-      animation: cardShine 3.5s ease-in-out infinite;
-    }
-
-    @keyframes cardShine {
-      0%   { left: -75%; }
-      60%  { left: 125%; }
-      100% { left: 125%; }
-    }
-
-    .card-icon {
-      font-size: 1.8rem;
-      flex-shrink: 0;
-      filter: drop-shadow(0 0 8px var(--purple-bright));
-    }
-
-    .card-divider {
-      width: 1px;
-      height: 36px;
-      background: rgba(168,85,247,0.4);
-      flex-shrink: 0;
-    }
-
-    .card-text {
-      font-size: 0.95rem;
-      line-height: 1.5;
-      color: rgba(240,230,255,0.8);
-      font-weight: 400;
-      text-align: left;
-    }
-
-
-  </style>
-</head>
-<body>
-
-  <!-- Partículas de fundo -->
-  <canvas id="particles"></canvas>
-
-  <!-- Brilho central -->
-  <div class="radial-glow"></div>
-
-  <!-- Ondas decorativas -->
-  <svg class="waves" viewBox="0 0 1440 200" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-    <defs>
-      <linearGradient id="wg" x1="0%" y1="0%" x2="100%" y2="0%">
-        <stop offset="0%"   stop-color="#6b21a8" stop-opacity="0"/>
-        <stop offset="30%"  stop-color="#a855f7" stop-opacity="0.6"/>
-        <stop offset="70%"  stop-color="#d946ef" stop-opacity="0.4"/>
-        <stop offset="100%" stop-color="#6b21a8" stop-opacity="0"/>
-      </linearGradient>
-    </defs>
-    <!-- Onda 1 -->
-    <path d="M0,120 C240,60 480,180 720,120 C960,60 1200,180 1440,120 L1440,200 L0,200 Z"
-          fill="url(#wg)" opacity="0.5">
-      <animateTransform attributeName="transform" type="translate"
-        values="0,0; -80,0; 0,0" dur="8s" repeatCount="indefinite"/>
-    </path>
-    <!-- Onda 2 -->
-    <path d="M0,150 C300,90 600,170 900,140 C1150,115 1300,160 1440,130 L1440,200 L0,200 Z"
-          fill="url(#wg)" opacity="0.3">
-      <animateTransform attributeName="transform" type="translate"
-        values="0,0; 60,0; 0,0" dur="6s" repeatCount="indefinite"/>
-    </path>
-    <!-- Onda 3 (fina de brilho) -->
-    <path d="M0,180 C360,155 720,195 1080,170 C1260,158 1380,175 1440,165 L1440,200 L0,200 Z"
-          fill="url(#wg)" opacity="0.6">
-      <animateTransform attributeName="transform" type="translate"
-        values="0,0; -40,0; 0,0" dur="5s" repeatCount="indefinite"/>
-    </path>
-  </svg>
-
-  <!-- Conteúdo central -->
-  <div class="container">
-
-    <!-- Anel giratório -->
-    <div class="ring-wrapper">
-      <div class="ring-outer"></div>
-      <div class="ring-inner"></div>
-      <div class="ring-dot"></div>
-    </div>
-
-    <!-- Título -->
-    <h1 class="title">EM DESENVOLVIMENTO</h1>
-
-    <!-- Linha decorativa -->
-    <div class="title-line"></div>
-
-    <!-- Subtítulo -->
-    <p class="subtitle">V O L T E &nbsp; E M &nbsp; B R E V E</p>
-
-    <!-- Card de mensagem -->
-    <div class="message-card">
-      <span class="card-icon">🚀</span>
-      <div class="card-divider"></div>
-      <p class="card-text">Estamos trabalhando para trazer algo incrível para você.</p>
-    </div>
-
-  </div>
-
-  <script>
-    /* ============================================================
-       PARTÍCULAS FLUTUANTES
-       Cria partículas roxas que sobem lentamente pela tela.
-    ============================================================ */
-    const canvas = document.getElementById('particles');
-    const ctx = canvas.getContext('2d');
-
-    // Redimensiona o canvas ao tamanho da janela
-    function resize() {
-      canvas.width  = window.innerWidth;
-      canvas.height = window.innerHeight;
-    }
-    resize();
-    window.addEventListener('resize', resize);
-
-    // Cria um array de partículas com propriedades aleatórias
-    const particles = Array.from({ length: 80 }, () => ({
-      x: Math.random() * window.innerWidth,
-      y: Math.random() * window.innerHeight,
-      r: Math.random() * 1.8 + 0.3,        // raio
-      speed: Math.random() * 0.4 + 0.1,    // velocidade de subida
-      drift: (Math.random() - 0.5) * 0.3,  // deriva horizontal
-      opacity: Math.random() * 0.6 + 0.1,
-    }));
-
-    // Loop de animação: limpa e redesenha cada frame
-    function drawParticles() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      for (const p of particles) {
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(168, 85, 247, ${p.opacity})`;
-        ctx.fill();
-
-        // Move a partícula para cima e lateralmente
-        p.y -= p.speed;
-        p.x += p.drift;
-
-        // Quando sair pelo topo, reposiciona na base com nova posição X
-        if (p.y < -5) {
-          p.y = canvas.height + 5;
-          p.x = Math.random() * canvas.width;
-        }
-      }
-
-      requestAnimationFrame(drawParticles); // chama o próximo frame
-    }
-    drawParticles();
-
-
   </script>
 </body>
 </html>
