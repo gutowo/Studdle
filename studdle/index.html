@@ -5,8 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Em Desenvolvimento</title>
 
-  <!-- ===== FAVICON ===== -->
-  <!-- O cache-bust (?v=2) força o navegador a recarregar a imagem -->
+
   <link rel="shortcut icon" type="image/png" href="studdle.png?v=2">
   <link rel="icon" type="image/png" sizes="16x16" href="studdle.png?v=2">
   <link rel="icon" type="image/png" sizes="32x32" href="studdle.png?v=2">
@@ -15,7 +14,7 @@
 
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@300;400;600&display=swap" rel="stylesheet"/>
   <style>
-    /* ===== VARIÁVEIS DE COR ===== */
+
     :root {
       --bg: #05030a;
       --purple-deep: #1a0533;
@@ -26,7 +25,7 @@
       --subtle: rgba(168, 85, 247, 0.15);
     }
 
-    /* ===== RESET E BASE ===== */
+  
     *, *::before, *::after {
       margin: 0; padding: 0; box-sizing: border-box;
     }
@@ -43,7 +42,7 @@
       position: relative;
     }
 
-    /* ===== CANVAS DE PARTÍCULAS (FUNDO) ===== */
+
     #particles {
       position: fixed;
       inset: 0;
@@ -51,7 +50,7 @@
       pointer-events: none;
     }
 
-    /* ===== ONDAS SVG NO RODAPÉ ===== */
+   
     .waves {
       position: fixed;
       bottom: 0;
@@ -61,7 +60,7 @@
       opacity: 0.35;
     }
 
-    /* ===== BRILHO RADIAL NO CENTRO ===== */
+ 
     .radial-glow {
       position: fixed;
       top: 50%;
@@ -80,7 +79,6 @@
       50%       { opacity: 1;   transform: translate(-50%, -50%) scale(1.12); }
     }
 
-    /* ===== CONTAINER PRINCIPAL ===== */
     .container {
       position: relative;
       z-index: 10;
@@ -89,16 +87,15 @@
       flex-direction: column;
       align-items: center;
       gap: 2rem;
-      /* Removido fadeUp do container — causava o título sair da tela */
+     
     }
 
-    /* fadeUp agora com deslocamento pequeno, usado só nos elementos internos */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(12px); }
       to   { opacity: 1; transform: translateY(0); }
     }
 
-    /* ===== ANEL GIRATÓRIO ===== */
+  
     .ring-wrapper {
       position: relative;
       width: 130px;
@@ -146,7 +143,7 @@
       50%       { box-shadow: 0 0 30px 12px var(--purple-bright); }
     }
 
-    /* ===== TÍTULO PRINCIPAL ===== */
+    
     .title {
       font-family: 'Bebas Neue', sans-serif;
       font-size: clamp(3rem, 9vw, 7rem);
@@ -156,7 +153,6 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      /* Sem transform no título — apenas fade simples para não deslocar */
       animation: fadeIn 1.2s ease 0.2s both;
       filter: drop-shadow(0 0 30px rgba(168,85,247,0.5));
     }
@@ -178,7 +174,7 @@
       to   { width: 80px; opacity: 1; }
     }
 
-    /* ===== SUBTÍTULO ===== */
+   
     .subtitle {
       font-size: clamp(0.75rem, 2vw, 0.95rem);
       letter-spacing: 0.45em;
@@ -187,7 +183,7 @@
       animation: fadeUp 1s ease 0.6s both;
     }
 
-    /* ===== CARD DE MENSAGEM ===== */
+   
     .message-card {
       display: flex;
       align-items: center;
